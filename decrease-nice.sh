@@ -29,5 +29,5 @@ pids=$(ps -A | grep "$1" | awk '{print $1}')
 if [ -n "${pids}" ]
 then
   echo "${pids}" | xargs -L 1 --replace='{}' ionice --class=idle --pid={}
-  echo "${pids}" | xargs renice -n -20
+  echo "${pids}" | xargs renice -n 20
 fi
