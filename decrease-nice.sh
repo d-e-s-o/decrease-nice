@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # *************************************************************************
-# * Copyright (C) 2014 Daniel Mueller (deso@posteo.net)                   *
+# * Copyright (C) 2014-2021 Daniel Mueller (deso@posteo.net)              *
 # *                                                                       *
 # * This program is free software: you can redistribute it and/or modify  *
 # * it under the terms of the GNU General Public License as published by  *
@@ -28,6 +28,6 @@ pids=$(ps -A | grep "$1" | awk '{print $1}')
 
 if [ -n "${pids}" ]
 then
-  echo "${pids}" | xargs -L 1 --replace='{}' ionice --class=idle --pid={}
+  echo "${pids}" | xargs -I'{}' ionice --class=idle --pid={}
   echo "${pids}" | xargs renice -n 20
 fi
